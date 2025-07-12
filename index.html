@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>WishKu</title>
+    <link rel="icon" href="./assets/img/icon.png" type="image/png">
+
+    <!-- Bootstrap & FontAwesome -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="./assets/css/style.css">
+</head>
+
+<body>
+    <div class="loading-screen" id="loadingScreen">
+        <div class="positon-relative">
+            <div class="position-absolute top-50 start-50 translate-middle text-center">
+                <div class="spinner-border" style="color: #fff;" role="status">
+                    <pan class="visually-hidden">Loading...</pan>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container pt-3">
+        <div class="card mb-3">
+            <div class="card-body text-center">
+                <a href="/">
+                    <img src="./assets/img/logo.png" alt="WishKu" width="150px">
+                </a>
+            </div>
+        </div>
+
+        <div id="loadingSpinner" class="text-center my-5">
+            <div class="spinner-border" style="color: #143D62;" role="status">
+                <span class="visually-hidden">Loading...</span>
+            </div>
+            <p class="mt-2">Memuat data...</p>
+        </div>
+
+        <div class="row">
+            <div class="col-md-9 col-12 mb-3">
+                <div class="card" id="cardUserList" style="display: none;">
+                    <div class="card-body">
+                        <div id="userList">
+                            <h4 class="card-title fw-bold">Wishlist Publik:</h4>
+                            <div id="loadingSpinner" class="text-center my-5" style="display: none;">
+                                <div class="spinner-border" style="color: #143D62;" role="status">
+                                    <span class="visually-hidden">Loading...</span>
+                                </div>
+                                <p class="mt-2">Memuat data...</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3 col-12">
+                <div class="card" id="cardRegister" style="display: none;">
+                    <div class="card-body">
+                        <div id="registerSection" style="display:none;">
+                            <h4 class="card-title fw-bold">Daftar:</h4>
+                            <form id="registerForm">
+                                <div class="mb-3">
+                                    <input type="text" id="name" class="form-control" placeholder="Nama" required />
+                                </div>
+                                <div class="mb-3">
+                                    <input type="text" id="no_hp" class="form-control" placeholder="No HP" required />
+                                </div>
+                                <div class="mb-3">
+                                    <textarea id="alamat" class="form-control" placeholder="Alamat" required></textarea>
+                                </div>
+                                <button type="submit" class="btn btn-primary w-100"
+                                    style="background-color: #143D62;">Daftar</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="wishlistSection" style="display:none;">
+            <div class="row">
+                <div class="col-md-4 col-12">
+                    <div class="card mb-3" id="wishlistUserData">
+                        <div class="card-body">
+                            <h4 class="card-title fw-bold">Profile:</h4>
+                            <table class="table table-borderless">
+                                <tr>
+                                    <td width="80px">Nama</td>
+                                    <td width="1px">:</td>
+                                    <td id="nameUser"></td>
+                                </tr>
+                                <tr>
+                                    <td>No. HP</td>
+                                    <td>:</td>
+                                    <td id="noHpUser"></td>
+                                </tr>
+                                <tr>
+                                    <td>Alamat</td>
+                                    <td>:</td>
+                                    <td id="addressUser"></td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div class="card mb-3" id="wishlistFormSection">
+                        <div class="card-body">
+                            <h4 class="card-title fw-bold">Tambah Wishlist</h4>
+                            <form id="wishlistForm">
+                                <div class="mb-3">
+                                    <input type="text" id="itemName" class="form-control" placeholder="Nama Barang"
+                                        required />
+                                </div>
+                                <div class="mb-3">
+                                    <input type="url" id="marketLink" class="form-control"
+                                        placeholder="Link Marketplace" required />
+                                </div>
+                                <button type="submit" class="btn btn-success w-100"><i class="fa fa-plus"></i>
+                                    Tambah</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-8 col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h4 class="card-title fw-bold">Wishlist:</h4>
+                            <ul id="wishlistList" class="p-0">
+                                <div class="position-relative">
+                                    <div id="loadingSpinner" class="text-center p-5">
+                                        <div class="spinner-border" style="color: #143D62;" role="status">
+                                            <span class="visually-hidden">Loading...</span>
+                                        </div>
+                                        <p class="mt-2">Memuat data...</p>
+                                    </div>
+                                </div>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+        </div>
+
+        <div class="alert alert-danger align-items-center" id="notfoundSection" role="alert" style="display:none;">
+            <div>
+                <i class="fa-solid fa-triangle-exclamation"></i>
+                <b>Data tidak ditemukan!</b> <u>Pastikan link yang kamu buka benar, atau daftar terlebih dahulu.</u>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="modalDownloadAccess" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+        aria-labelledby="modalDownloadAccessLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-body text-center">
+                    <p class="mb-3 fw-bold">Simpan ID ini untuk access WishKu Editor anda!</p>
+                    <input type="text" class="form-control text-center mb-3" id="newUID" value="" readonly>
+                    <button class="btn btn-primary" style="background-color: #143D62;" id="downloadAccess">
+                        <i class="fa-solid fa-download"></i> Download Access
+                    </button>
+                    <button class="btn btn-secondary" style="display: none;" id="toWishKuEditor">
+                        WishKu Editor <i class="fa-solid fa-arrow-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="container text-center text-lg-start mt-5">
+        <div class="text-center p-3 text-muted  border-top" style="font-size: 14px;">
+            &copy; <span id="year"></span> WishKu. All rights reserved.
+        </div>
+    </footer>
+
+
+    <!-- Bootstrap JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Firebase SDK -->
+    <script src="https://www.gstatic.com/firebasejs/11.10.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/11.10.0/firebase-database-compat.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="./assets/js/loading.js"></script>
+    <script src="./assets/js/script.js"></script>
+</body>
+
+</html>
